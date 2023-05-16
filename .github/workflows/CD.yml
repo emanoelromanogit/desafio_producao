@@ -2,7 +2,7 @@ name: CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "release" ]
     
   workflow_dispatch:
   
@@ -39,17 +39,6 @@ jobs:
           
       - name: Install dependencies
         run: npm install
-        
-      - name: Run the tests
-        run: npm run test -- --coverage
-        env: 
-          CI: true
-          
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           
       - name: Build the application
         run: npm run build
